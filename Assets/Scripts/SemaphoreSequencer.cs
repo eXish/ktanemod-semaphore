@@ -45,11 +45,32 @@ public class SemaphoreSequencer : MonoBehaviour
         { 'Z', SemaphoreCharacter.Z }
     };
 
-    public string SequenceString = null;
     public SemaphoreBody SemaphoreBody = null;
 
     private List<SemaphoreCharacter> _characterSequence = null;
     private int _currentCharacterIndex = -1;
+
+    public SemaphoreCharacter CurrentCharacter
+    {
+        get
+        {
+            if (_currentCharacterIndex == -1)
+            {
+                return SemaphoreCharacter.Rest_Space;
+            }
+
+            return _characterSequence[_currentCharacterIndex];
+        }
+    }
+
+    public void SetSequenceString(string sequenceString)
+    {
+        _characterSequence = null;
+        SetCharacterIndex(-1);
+
+        sequenceString = Regex.Replace(sequenceString, @"[^A-Z0-9]", "");
+        BuildCharacterSequence(sequenceString);
+    }
 
     public void NextCharacter()
     {
@@ -67,19 +88,12 @@ public class SemaphoreSequencer : MonoBehaviour
         StartCoroutine(ReturnToCharacter());
     }
 
-    private void Start()
-    {
-        SequenceString = Regex.Replace(SequenceString, @"[^A-Z0-9]", "");
-
-        BuildCharacterSequence();
-    }
-
-    private void BuildCharacterSequence()
+    private void BuildCharacterSequence(string sequenceString)
     {
         bool? isNumerals = null;
         _characterSequence = new List<SemaphoreCharacter>();
 
-        foreach (char character in SequenceString)
+        foreach (char character in sequenceString)
         {
             bool isNumber = char.IsNumber(character);
             if (isNumber && (!isNumerals.HasValue || !isNumerals.Value))
