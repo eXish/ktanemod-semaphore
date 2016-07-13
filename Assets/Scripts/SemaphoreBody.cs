@@ -18,28 +18,50 @@ public enum SemaphoreCharacter
     Rest_Space,
     [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.UpOut)]
     Numerals,
-    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Down)]
-    A_1,
-    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.Down)]
-    B_2,
-    [SemaphoreCombination(FlagOrientation.UpOut, FlagOrientation.Down)]
-    C_3,
-    [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.Down)]
-    D_4,
-    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.UpOut)]
-    E_5,
-    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.Out)]
-    F_6,
-    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.DownOut)]
-    G_7,
-    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.DownIn)]
-    H_8,
-    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.UpIn)]
-    I_9,
     [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.Out)]
-    J_Letters,
+    Letters,
     [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Up)]
-    K_0,
+    Zero,
+    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Down)]
+    One,
+    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.Down)]
+    Two,
+    [SemaphoreCombination(FlagOrientation.UpOut, FlagOrientation.Down)]
+    Three,
+    [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.Down)]
+    Four,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.UpOut)]
+    Five,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.Out)]
+    Six,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.DownOut)]
+    Seven,
+    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.DownIn)]
+    Eight,
+    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.UpIn)]
+    Nine,
+    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Down)]
+    A,
+    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.Down)]
+    B,
+    [SemaphoreCombination(FlagOrientation.UpOut, FlagOrientation.Down)]
+    C,
+    [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.Down)]
+    D,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.UpOut)]
+    E,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.Out)]
+    F,
+    [SemaphoreCombination(FlagOrientation.Down, FlagOrientation.DownOut)]
+    G,
+    [SemaphoreCombination(FlagOrientation.Out, FlagOrientation.DownIn)]
+    H,
+    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.UpIn)]
+    I,
+    [SemaphoreCombination(FlagOrientation.Up, FlagOrientation.Out)]
+    J,
+    [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Up)]
+    K,
     [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.UpOut)]
     L,
     [SemaphoreCombination(FlagOrientation.DownOut, FlagOrientation.Out)]

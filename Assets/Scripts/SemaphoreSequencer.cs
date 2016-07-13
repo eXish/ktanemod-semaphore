@@ -7,27 +7,27 @@ public class SemaphoreSequencer : MonoBehaviour
 {
     private static readonly Dictionary<char, SemaphoreCharacter> CharacterMapping = new Dictionary<char, SemaphoreCharacter>()
     {
-        { '0', SemaphoreCharacter.K_0 },
-        { '1', SemaphoreCharacter.A_1 },
-        { '2', SemaphoreCharacter.B_2 },
-        { '3', SemaphoreCharacter.C_3 },
-        { '4', SemaphoreCharacter.D_4 },
-        { '5', SemaphoreCharacter.E_5 },
-        { '6', SemaphoreCharacter.F_6 },
-        { '7', SemaphoreCharacter.G_7 },
-        { '8', SemaphoreCharacter.H_8 },
-        { '9', SemaphoreCharacter.I_9 },
-        { 'A', SemaphoreCharacter.A_1 },
-        { 'B', SemaphoreCharacter.B_2 },
-        { 'C', SemaphoreCharacter.C_3 },
-        { 'D', SemaphoreCharacter.D_4 },
-        { 'E', SemaphoreCharacter.E_5 },
-        { 'F', SemaphoreCharacter.F_6 },
-        { 'G', SemaphoreCharacter.G_7 },
-        { 'H', SemaphoreCharacter.H_8 },
-        { 'I', SemaphoreCharacter.I_9 },
-        { 'J', SemaphoreCharacter.J_Letters },
-        { 'K', SemaphoreCharacter.K_0 },
+        { '0', SemaphoreCharacter.Zero },
+        { '1', SemaphoreCharacter.One },
+        { '2', SemaphoreCharacter.Two },
+        { '3', SemaphoreCharacter.Three },
+        { '4', SemaphoreCharacter.Four },
+        { '5', SemaphoreCharacter.Five },
+        { '6', SemaphoreCharacter.Six },
+        { '7', SemaphoreCharacter.Seven },
+        { '8', SemaphoreCharacter.Eight },
+        { '9', SemaphoreCharacter.Nine },
+        { 'A', SemaphoreCharacter.A },
+        { 'B', SemaphoreCharacter.B },
+        { 'C', SemaphoreCharacter.C },
+        { 'D', SemaphoreCharacter.D },
+        { 'E', SemaphoreCharacter.E },
+        { 'F', SemaphoreCharacter.F },
+        { 'G', SemaphoreCharacter.G },
+        { 'H', SemaphoreCharacter.H },
+        { 'I', SemaphoreCharacter.I },
+        { 'J', SemaphoreCharacter.J },
+        { 'K', SemaphoreCharacter.K },
         { 'L', SemaphoreCharacter.L },
         { 'M', SemaphoreCharacter.M },
         { 'N', SemaphoreCharacter.N },
@@ -44,6 +44,11 @@ public class SemaphoreSequencer : MonoBehaviour
         { 'Y', SemaphoreCharacter.Y },
         { 'Z', SemaphoreCharacter.Z }
     };
+
+    public static SemaphoreCharacter GetSemaphoreCharacter(char character)
+    {
+        return CharacterMapping[character];
+    }
 
     public SemaphoreBody SemaphoreBody = null;
 
@@ -104,10 +109,10 @@ public class SemaphoreSequencer : MonoBehaviour
             else if (!isNumber && (!isNumerals.HasValue || isNumerals.Value))
             {
                 isNumerals = false;
-                _characterSequence.Add(SemaphoreCharacter.J_Letters);
+                _characterSequence.Add(SemaphoreCharacter.Letters);
             }
 
-            _characterSequence.Add(CharacterMapping[character]);
+            _characterSequence.Add(GetSemaphoreCharacter(character));
         }
 
         SetCharacterIndex(0);
