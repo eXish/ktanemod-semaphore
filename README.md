@@ -16,7 +16,7 @@ Firstly, ensure that you are on the modpreview Beta of Keep Talking and Nobody E
 
 Next, join the KTANEMod Beta community group on Steam by going to http://steamcommunity.com/groups/ktanemodbeta
 
-Finally, goto http://steamcommunity.com/sharedfiles/filedetails/?id=723983165 to subscribe to the Piano Keys mod. This will download the module automatically for you, and will continue to download updates for the module when updates are released.
+Finally, goto http://steamcommunity.com/sharedfiles/filedetails/?id=723983165 to subscribe to the Semaphore mod. This will download the module automatically for you, and will continue to download updates for the module when updates are released.
 
 ## Non-Steam Installation
 
