@@ -28,11 +28,15 @@ public class SemaphoreModule : MonoBehaviour
     private void Start()
     {
         BombModule.OnActivate += StartModule;
-        BombModule.OnDeactivate += EndModule;
 
         PreviousButton.OnInteract += OnPrevious;
         NextButton.OnInteract += OnNext;
         OKButton.OnInteract += OnOK;
+    }
+
+    private void OnDeactivate()
+    {
+        EndModule();
     }
     #endregion
 
