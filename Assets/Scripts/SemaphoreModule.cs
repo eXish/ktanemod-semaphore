@@ -34,7 +34,7 @@ public class SemaphoreModule : MonoBehaviour
         OKButton.OnInteract += OnOK;
     }
 
-    private void OnDeactivate()
+    private void OnDestroy()
     {
         EndModule();
     }
@@ -50,7 +50,6 @@ public class SemaphoreModule : MonoBehaviour
     private void EndModule()
     {
         BombModule.OnActivate -= StartModule;
-        BombModule.OnDeactivate -= EndModule;
     }
     #endregion
 
