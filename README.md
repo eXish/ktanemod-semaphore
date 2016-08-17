@@ -1,6 +1,6 @@
 # Semaphore - a KTANEModKit module
 
-![Semaphore Module](https://ashbash1987.github.io/ktanemod-semaphore/Manual/img/Component.png "Semaphore Module")
+![Semaphore Module](https://ashbash1987.github.io/ktanemod-semaphore/Manual/img/Component.svg "Semaphore Module")
 
 Semaphore is a module leveraging the newly-exposed KTANEModKit for _Keep Talking and Nobody Explodes_. It employs the use of the semaphore flag telegraphy system as its main gimmick.
 
