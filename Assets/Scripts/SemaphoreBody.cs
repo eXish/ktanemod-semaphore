@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class SemaphoreCombinationAttribute : System.Attribute
 {
@@ -6,6 +8,104 @@ public class SemaphoreCombinationAttribute : System.Attribute
     {
         LeftHand = leftHand;
         RightHand = rightHand;
+    }
+
+    public string[] GetStringRepresentation()
+    {
+        char[][] lines = new char[][] { "         ".ToCharArray(),
+                                        "         ".ToCharArray(),
+                                        "  +   +  ".ToCharArray(),
+                                        "         ".ToCharArray(),
+                                        "         ".ToCharArray() };
+
+        string leftHandCardinal = "";
+        switch (LeftHand)
+        {
+            case FlagOrientation.UpIn:
+                leftHandCardinal = "NE";
+                lines[0][4] = '/';
+                lines[1][3] = '/';
+                break;
+            case FlagOrientation.Up:
+                leftHandCardinal = "N";
+                lines[0][2] = '|';
+                lines[1][2] = '|';
+                break;
+            case FlagOrientation.UpOut:
+                leftHandCardinal = "NW";
+                lines[0][0] = '\\';
+                lines[1][1] = '\\';
+                break;
+            case FlagOrientation.Out:
+                leftHandCardinal = "W";
+                lines[2][0] = '-';
+                lines[2][1] = '-';
+                break;
+            case FlagOrientation.DownOut:
+                leftHandCardinal = "SW";
+                lines[3][1] = '/';
+                lines[4][0] = '/';
+                break;
+            case FlagOrientation.Down:
+                leftHandCardinal = "S";
+                lines[3][2] = '|';
+                lines[4][2] = '|';
+                break;
+            case FlagOrientation.DownIn:
+                leftHandCardinal = "SE";
+                lines[3][3] = '\\';
+                lines[4][4] = '\\';
+                break;
+            default:
+                break;
+        }
+
+        string rightHandCardinal = "";
+        switch (RightHand)
+        {
+            case FlagOrientation.UpIn:
+                rightHandCardinal = "NW";
+                lines[0][4] = '\\';
+                lines[1][5] = '\\';
+                break;
+            case FlagOrientation.Up:
+                rightHandCardinal = "N";
+                lines[0][6] = '|';
+                lines[1][6] = '|';
+                break;
+            case FlagOrientation.UpOut:
+                rightHandCardinal = "NE";
+                lines[0][8] = '/';
+                lines[1][7] = '/';
+                break;
+            case FlagOrientation.Out:
+                rightHandCardinal = "E";
+                lines[2][7] = '-';
+                lines[2][8] = '-';
+                break;
+            case FlagOrientation.DownOut:
+                rightHandCardinal = "SE";
+                lines[3][7] = '\\';
+                lines[4][8] = '\\';
+                break;
+            case FlagOrientation.Down:
+                rightHandCardinal = "S";
+                lines[3][6] = '|';
+                lines[4][6] = '|';
+                break;
+            case FlagOrientation.DownIn:
+                rightHandCardinal = "SW";
+                lines[3][5] = '/';
+                lines[4][4] = '/';
+                break;
+            default:
+                break;
+        }
+
+        List<string> stringLines = lines.Select((x) => new string(x)).ToList();
+        stringLines.Add(string.Format(" [{0,2}.{1,-2}] ", leftHandCardinal, rightHandCardinal));
+
+        return stringLines.ToArray();
     }
 
     public readonly FlagOrientation LeftHand;

@@ -52,25 +52,25 @@ public class SemaphoreSequencer : MonoBehaviour
 
     public SemaphoreBody SemaphoreBody = null;
 
-    private List<SemaphoreCharacter> _characterSequence = null;
-    private int _currentCharacterIndex = -1;
+    public List<SemaphoreCharacter> characterSequence = null;
+    public int currentCharacterIndex = -1;
 
     public SemaphoreCharacter CurrentCharacter
     {
         get
         {
-            if (_currentCharacterIndex == -1)
+            if (currentCharacterIndex == -1)
             {
                 return SemaphoreCharacter.Rest_Space;
             }
 
-            return _characterSequence[_currentCharacterIndex];
+            return characterSequence[currentCharacterIndex];
         }
     }
 
     public void SetSequenceString(string sequenceString)
     {
-        _characterSequence = null;
+        characterSequence = null;
         SetCharacterIndex(-1);
 
         sequenceString = Regex.Replace(sequenceString, @"[^A-Z0-9]", "");
@@ -79,12 +79,12 @@ public class SemaphoreSequencer : MonoBehaviour
 
     public void NextCharacter()
     {
-        SetCharacterIndex(_currentCharacterIndex + 1);
+        SetCharacterIndex(currentCharacterIndex + 1);
     }
 
     public void PreviousCharacter()
     {
-        SetCharacterIndex(_currentCharacterIndex - 1);
+        SetCharacterIndex(currentCharacterIndex - 1);
     }
 
     public void Error()
@@ -96,7 +96,7 @@ public class SemaphoreSequencer : MonoBehaviour
     private void BuildCharacterSequence(string sequenceString)
     {
         bool? isNumerals = null;
-        _characterSequence = new List<SemaphoreCharacter>();
+        characterSequence = new List<SemaphoreCharacter>();
 
         foreach (char character in sequenceString)
         {
@@ -104,15 +104,15 @@ public class SemaphoreSequencer : MonoBehaviour
             if (isNumber && (!isNumerals.HasValue || !isNumerals.Value))
             {
                 isNumerals = true;
-                _characterSequence.Add(SemaphoreCharacter.Numerals);
+                characterSequence.Add(SemaphoreCharacter.Numerals);
             }
             else if (!isNumber && (!isNumerals.HasValue || isNumerals.Value))
             {
                 isNumerals = false;
-                _characterSequence.Add(SemaphoreCharacter.Letters);
+                characterSequence.Add(SemaphoreCharacter.Letters);
             }
 
-            _characterSequence.Add(GetSemaphoreCharacter(character));
+            characterSequence.Add(GetSemaphoreCharacter(character));
         }
 
         SetCharacterIndex(0);
@@ -121,17 +121,17 @@ public class SemaphoreSequencer : MonoBehaviour
     private IEnumerator ReturnToCharacter()
     {
         yield return new WaitForSeconds(1.0f);
-        SetCharacterIndex(_currentCharacterIndex);
+        SetCharacterIndex(currentCharacterIndex);
     }
 
     private void SetCharacterIndex(int characterIndex)
     {
-        if (_characterSequence != null && characterIndex >= 0 && characterIndex < _characterSequence.Count)
+        if (characterSequence != null && characterIndex >= 0 && characterIndex < characterSequence.Count)
         {
-            _currentCharacterIndex = characterIndex;
-            SemaphoreBody.Character = _characterSequence[characterIndex];
+            currentCharacterIndex = characterIndex;
+            SemaphoreBody.Character = characterSequence[characterIndex];
         }
-        else if (_currentCharacterIndex == -1)
+        else if (currentCharacterIndex == -1)
         {
             SemaphoreBody.Character = SemaphoreCharacter.Rest_Space;
         }
