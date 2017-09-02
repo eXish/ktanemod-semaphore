@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using System;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 public class SemaphoreModule : MonoBehaviour
 {
@@ -144,6 +147,87 @@ public class SemaphoreModule : MonoBehaviour
         
         IEnumerable<char> finalSequence = pickedCharacters.Shuffle();
         return new string(finalSequence.ToArray());
+    }
+    #endregion
+
+    #region Twitch Plays
+    public string TwitchHelpMessage = "Cycle the flags with !{0} cycle. Set the flag at a given position with !{0} set 5 (1 is the first flag). Move to the next flag with !{0} move right or !{0} press right. Move to previous flag with !{0} move left or !{0} press left. Submit with !{0} press ok.";
+
+    public IEnumerator ProcessTwitchCommand(string command)
+    {
+        if (command.Equals("press left", StringComparison.InvariantCultureIgnoreCase) ||
+            command.Equals("move left", StringComparison.InvariantCultureIgnoreCase))
+        {
+            yield return new KMSelectable[] { PreviousButton };
+        }
+        else if (command.Equals("press right", StringComparison.InvariantCultureIgnoreCase) ||
+            command.Equals("move right", StringComparison.InvariantCultureIgnoreCase))
+        {
+            yield return new KMSelectable[] { NextButton };
+        }
+        else if (command.Equals("press ok", StringComparison.InvariantCultureIgnoreCase))
+        {
+            yield return new KMSelectable[] { OKButton };
+        }
+        else if (command.Equals("cycle", StringComparison.InvariantCultureIgnoreCase))
+        {
+            int initialCharacterIndex = Sequencer.currentCharacterIndex;
+
+            while (Sequencer.currentCharacterIndex > 0)
+            {
+                yield return PreviousButton;
+                yield return PreviousButton;
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            while (Sequencer.currentCharacterIndex < Sequencer.characterSequence.Count - 1)
+            {
+                yield return new WaitForSeconds(1.5f);
+                yield return NextButton;
+                yield return NextButton;
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            yield return new WaitForSeconds(3.0f);
+
+            while (Sequencer.currentCharacterIndex > initialCharacterIndex)
+            {
+                yield return PreviousButton;
+                yield return PreviousButton;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else
+        {
+            Match setMatch = Regex.Match(command, "^set ([0-9]+)$", RegexOptions.IgnoreCase);
+            if (!setMatch.Success)
+            {
+                yield break;
+            }
+
+            string indexString = setMatch.Groups[1].Value;
+            int index = int.MinValue;
+            if (int.TryParse(indexString, out index) && index >= 1 && index <= Sequencer.characterSequence.Count)
+            {
+                index--;
+                while (Sequencer.currentCharacterIndex > index)
+                {
+                    yield return PreviousButton;
+                    yield return PreviousButton;
+                    yield return new WaitForSeconds(0.1f);
+                }
+                while (Sequencer.currentCharacterIndex < index)
+                {
+                    yield return NextButton;
+                    yield return NextButton;
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            else
+            {
+                yield break;
+            }
+        }
     }
     #endregion
 }
