@@ -158,19 +158,23 @@ public class SemaphoreModule : MonoBehaviour
         if (command.Equals("press left", StringComparison.InvariantCultureIgnoreCase) ||
             command.Equals("move left", StringComparison.InvariantCultureIgnoreCase))
         {
+            yield return null;
             yield return new KMSelectable[] { PreviousButton };
         }
         else if (command.Equals("press right", StringComparison.InvariantCultureIgnoreCase) ||
             command.Equals("move right", StringComparison.InvariantCultureIgnoreCase))
         {
+            yield return null;
             yield return new KMSelectable[] { NextButton };
         }
         else if (command.Equals("press ok", StringComparison.InvariantCultureIgnoreCase))
         {
+            yield return null;
             yield return new KMSelectable[] { OKButton };
         }
         else if (command.Equals("cycle", StringComparison.InvariantCultureIgnoreCase))
         {
+            yield return null;
             int initialCharacterIndex = Sequencer.currentCharacterIndex;
 
             while (Sequencer.currentCharacterIndex > 0)
@@ -209,6 +213,7 @@ public class SemaphoreModule : MonoBehaviour
             int index = int.MinValue;
             if (int.TryParse(indexString, out index) && index >= 1 && index <= Sequencer.characterSequence.Count)
             {
+                yield return null;
                 index--;
                 while (Sequencer.currentCharacterIndex > index)
                 {
