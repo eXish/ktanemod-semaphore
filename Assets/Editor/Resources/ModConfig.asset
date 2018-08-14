@@ -23,6 +23,6 @@ MonoBehaviour:
     the module look a little nicer, please let me know!\r\n\r\n[h1]Mission Makers[/h1]\r\nFor
     those making custom missions and wanting to reference this module, the type name
     is [b][i]Semaphore[/i][/b]."
-  version: v1.4.1
+  version: v1.4.2
   outputFolder: E:\Games\SteamLibrary\steamapps\common\Keep Talking and Nobody Explodes\mods
   previewImage: {fileID: 2800000, guid: 42a2a9b44d8daf2458b49900211051fc, type: 3}
