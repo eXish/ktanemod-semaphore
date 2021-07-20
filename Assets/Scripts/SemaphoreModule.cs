@@ -234,5 +234,29 @@ public class SemaphoreModule : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator TwitchHandleForcedSolve()
+    {
+        while (_semaphoreSequence == null) yield return true;
+        int endIndex = Sequencer.characterSequence.IndexOf(_correctSemaphoreCharacter);
+        int curIndex = Sequencer.currentCharacterIndex;
+        if (curIndex < endIndex)
+        {
+            for (int i = 0; i < endIndex - curIndex; i++)
+            {
+                NextButton.OnInteract();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else if (curIndex > endIndex)
+        {
+            for (int i = 0; i < curIndex - endIndex; i++)
+            {
+                PreviousButton.OnInteract();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        OKButton.OnInteract();
+    }
     #endregion
 }
